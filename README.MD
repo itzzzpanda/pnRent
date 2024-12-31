@@ -1,6 +1,12 @@
 <h1 align='center'>pnRent</a></h1>
 
-<p align='center'><b>Simple rent menu with UI inspired by Nopixel 4.0</b></p>
+<h3 align="center">Description</h3>
+<p align="center">This is a Rent System with the UI inspired by Nopixel 4.0 .<p>
+
+<hr>
+
+<h3 align="center">Support Frameworks</h3>
+<p align="center">QBCore<br>ESX<br>vRP</p>
 
 <hr>
 
