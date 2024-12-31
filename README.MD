@@ -5,12 +5,12 @@
 
 <hr>
 
-<h3 align="center">Support Frameworks</h3>
+<h3 align="center">Supported Frameworks</h3>
 <p align="center">QBCore<br>ESX<br>vRP</p>
 
 <hr>
 
-<h3 align="center">Support Targets</h3>
+<h3 align="center">Supported Targets</h3>
 <p align="center">qb-target<br>ox_target</p>
 
 <hr>
