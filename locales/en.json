@@ -1,0 +1,14 @@
+{
+    "success": {
+        "paid": "You paid %s for the rental vehicle"
+    },
+    "error": {
+        "not_enough": "You don't have enough money to buy this vehicle"
+    },
+    "textui": {
+        "open": "[E] Open Rent Menu"
+    },
+    "target": {
+        "open": "Open Rent Menu"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "success": {
+        "paid": "Ai platit %s pentru acest vehicul"
+    },
+    "error": {
+        "not_enough": "Nu ai destui bani pentru a achizitiona acest vehicul"
+    },
+    "textui": {
+        "open": "[E] Deschide Meniul de Inchirieri"
+    },
+    "target": {
+        "open": "Deschide Meniul de Inchirieri"
+    }
+}
