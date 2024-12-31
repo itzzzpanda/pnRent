@@ -10,6 +10,16 @@
 
 <hr>
 
+<h3 align="center">Support Targets</h3>
+<p align="center">qb-target<br>ox_target</p>
+
+<hr>
+
+<h3 align="center">Supported TextUI</h3>
+<p align="center">QBCore<br>ESX<br>okokTextUI</p>
+
+<hr>
+
 <h3 align='center'>Dependency</h3>
 <p align='center'><a href="https://github.com/overextended/ox_lib/releases"> ox_lib </a></p>
 
