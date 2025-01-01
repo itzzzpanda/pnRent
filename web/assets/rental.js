@@ -27,7 +27,7 @@ openMenu = (data) => {
   setCategory(data["Category"])
   setCar(data["Category"][0].name)
 
-  $('#rental').css('display', 'block')
+  $('body').css('display', 'block')
 }
 
 setCategory = (data) => {
@@ -61,7 +61,7 @@ setCar = (data) => {
 
 closeNUI = () => {
   $.post(`https://${GetParentResourceName()}/pnRental:close`, JSON.stringify({}));
-  $('#rental').css('display', 'none')
+  $('body').css('display', 'none')
 }
 
 

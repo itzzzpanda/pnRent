@@ -28,7 +28,8 @@ files {
     'config.lua',
     
 	"web/*.*",
-	"web/assets/*.*"
+    "web/assets/*.*",
+	"web/assets/**/*.*"
 }
 
 dependency 'ox_lib'

@@ -1,56 +1,56 @@
 @font-face {
   font-family: AkrobatBlack;
-  src: url('https://dynorp.eu/images/utils/fonts/Akrobat-Black.ttf');
+  src: url('fonts/Akrobat-Black.otf');
 }
 
 @font-face {
   font-family: AkrobatBold;
-  src: url('https://dynorp.eu/images/utils/fonts/Akrobat-Bold.ttf');
+  src: url('fonts/Akrobat-Bold.otf');
 }
 
 @font-face {
   font-family: AkrobatExtraBold;
-  src: url('https://dynorp.eu/images/utils/fonts/Akrobat-ExtraBold.ttf');
+  src: url('fonts/Akrobat-ExtraBold.otf');
 }
 
 
 @font-face {
   font-family: AkrobatLight;
-  src: url('https://dynorp.eu/images/utils/fonts/Akrobat-Light.ttf');
+  src: url('fonts/Akrobat-Light.otf');
 }
 
 @font-face {
   font-family: AkrobatExtraLight;
-  src: url('https://dynorp.eu/images/utils/fonts/Akrobat-ExtraLight.ttf');
+  src: url('fonts/Akrobat-ExtraLight.otf');
 }
 
 
 @font-face {
   font-family: AkrobatRegular;
-  src: url('https://dynorp.eu/images/utils/fonts/Akrobat-Regular.ttf');
+  src: url('fonts/Akrobat-Regular.otf');
 }
 
 
 @font-face {
   font-family: AkrobatSemiBold;
-  src: url('https://dynorp.eu/images/utils/fonts/Akrobat-SemiBold.ttf');
+  src: url('fonts/Akrobat-SemiBold.otf');
 }
 
 @font-face {
   font-family: AkrobatThin;
-  src: url('https://dynorp.eu/images/utils/fonts/Akrobat-Thin.ttf');
+  src: url('fonts/Akrobat-Thin.otf');
 }
 
-#rental {
+body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
   overflow: hidden;
-  display: none;
+  display: block;
   zoom: 1.5;
-  /* justify-content: center; */
-  /* align-items: center; */
+  justify-content: center;
+  align-items: center;
 }
 
 /* inset 1. = top,
