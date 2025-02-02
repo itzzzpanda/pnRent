@@ -4,7 +4,7 @@ lua54 'yes'
 
 name 'pnRent'
 description 'Simple rent menu with UI inspired by Nopixel 4.0'
-version '1.0.0
+version '1.0.0'
 
 ox_lib 'locale'
 
@@ -13,23 +13,24 @@ shared_scripts {
 }
 
 
-client_script 'client.lua'
+client_scripts {
+    'client.lua'
+}
 
 server_scripts {
     'server.lua',
-    '@oxmysql/lib/MySQL.lua'
+    '@oxmysql/lib/MySQL.lua',
 }
 
-ui_page "web/index.html"
-ui_page_preload "yes"
+ui_page "webv2/dist/index.html"
 
 files {
     'locales/*.json',
     'config.lua',
     
-	"web/*.*",
-    "web/assets/*.*",
-	"web/assets/**/*.*"
+	"webv2/dist/**",
+    "webv2/dist/assets/*.*",
+	"webv2/dist/assets/**/*.*"
 }
 
 dependency 'ox_lib'

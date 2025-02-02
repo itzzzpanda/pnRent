@@ -98,7 +98,7 @@ lib.callback.register('pnRental:rent', function(source, data)
                 return false
             end
         else
-            if Player.getAccount('bank').money >= data.carPrice then           |
+            if Player.getAccount('bank').money >= data.carPrice then           
 
                 Player.removeAccountMoney('bank', data.carPrice)
                 return true
@@ -124,3 +124,6 @@ lib.callback.register('pnRental:rent', function(source, data)
     end
 end)
 
+if Config.VersionCheck then 
+    lib.versionCheck('PandaRomania/pnRent')
+end

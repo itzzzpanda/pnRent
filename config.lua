@@ -1,10 +1,12 @@
 return {
+    VersionCheck = true,
+
     Core = {
-        Name = 'QBCore'
+        Name = 'QBCore',
         -- vRP
         -- QBCore
         -- ESX
-        ResourceName == 'dnBase' -- Name of the Core Resource
+        ResourceName = 'qb-core' -- Name of the Core Resource
         -- i.e vRP => vrp
         -- i.e QBCore => qb-core
         -- i.e ESX => es_extended
@@ -15,37 +17,37 @@ return {
     Interactions = {
         Target = {
             Enabled = true,
-            TargetName = 'ox_target'
+            ResourceName = 'qb-target'
             -- Curently supported : ox_target | qb-target
         },
         TextUI = {
-            Enabled = false
+            Enabled = false,
             Open = function(text)
-                -- exports[Core.ResourceName]:DrawText(text) ( QBCore )
-                -- exports['esx_textui']:TextUI(text, 'info') ( ESX )
-                -- exports['okokTextUI']:Open(text, 'lightgreen', 'left')
+                exports[Core.ResourceName]:DrawText(text) -- ( QBCore )
+                -- exportsesx_textui:TextUI(text, 'info') ( ESX )
+                -- exportsokokTextUI:Open(text, 'lightgreen', 'left')
             end,
             Close = function()
-                -- exports[Core.ResourceName]:HideText() ( QBCore )
-                -- exports['esx_textui']:HideUI() ( ESX )
-                -- exports['okokTextUI']:Close() ( okokTextUI )
+                exports[Core.ResourceName]:HideText() -- ( QBCore )
+                -- exportsesx_textui:HideUI() ( ESX )
+                -- exportsokokTextUI:Close() ( okokTextUI )
             end
         }
     },
 
     -------------# Vehicle Fuel Resource Name #-------------
 
-    FuelResource = 'cfn-fuel',
+    FuelResource = 'LegacyFuel',
 
     -------------# Vehicles in Rent Menu #-------------
 
     Rent = {
         Category = {
             { name = "Cars" },
-            { name = "Motociclete" },
+            { name = "Motorcycles" },
         },
     
-        Cars = {
+        Vehicles = {
        
             ["Cars"]  = {
                 {name = "Sultan", price = 250 , model = "sultan" , img = "https://raw.githubusercontent.com/MericcaN41/gta5carimages/main/images/sultan.png" },
@@ -75,7 +77,7 @@ return {
             {name = "Boats"}
         },
     
-        Cars = {
+        Vehicles = {
             ["Boats"]  = {
                 {name = "Sea Shark", price = 350 , model = "seashark" , img = "https://r2.fivemanage.com/ZrUYLRK1lGQX9xgdwjNb3/seaashark.png"},
                 {name = "Dinghy", price = 350 , model = "dinghy" , img = "https://r2.fivemanage.com/ZrUYLRK1lGQX9xgdwjNb3/dinghyy.png"},
@@ -92,36 +94,36 @@ return {
 
     Locations = {
         [1] = {
-            ['label'] = 'Inchirieri Auto',
-            ['coords'] = vector4(-1037.66, -2761.97, 20.84, 46.18),
-            ['carspawn'] = vector4(-1036.82, -2729.24, 19.44, 240.37),
-            ['categorie'] = Config.Rent,
-            ['ped'] = 'csb_sol',
-            ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
-            ['showblip'] = true,
-            ['blipsprite'] = 225,
-            ['blipscale'] = 0.6,
-            ['blipcolor'] = 2,
+            label = 'Inchirieri Auto',
+            coords = vector4(-1041.23, -2730.08, 13.8, 201.48),
+            carspawn = vector4(-1036.82, -2729.24, 19.44, 240.37),
+            categorie = "Rent",
+            ped = 'csb_sol',
+            scenario = 'WORLD_HUMAN_STAND_MOBILE',
+            showblip = true,
+            blipsprite = 225,
+            blipscale = 0.6,
+            blipcolor = 2,
 
             -- If Target is Enabled otherwise, leave it alone
-            ['radius'] = 1.5,
-            ['targetIcon'] = 'fas fa-ship'
+            radius = 1.5,
+            targetIcon = 'fas fa-ship'
         },
         [2] = {
-            ['label'] = 'Inchirieri Barci',
-            ['coords'] = vector4(-806.81, -1497.1, 1.6, 114.24),
-            ['carspawn'] = vector4(-806.59, -1504.73, -0.09, 124.98),
-            ['categorie'] = Config.Boat,
-            ['ped'] = 'csb_sol',
-            ['scenario'] = 'WORLD_HUMAN_CLIPBOARD',
-            ['showblip'] = true,
-            ['blipsprite'] = 356,
-            ['blipscale'] = 0.6,
-            ['blipcolor'] = 5,
+            label = 'Inchirieri Barci',
+            coords = vector4(-806.81, -1497.1, 1.6, 114.24),
+            carspawn = vector4(-806.59, -1504.73, -0.09, 124.98),
+            categorie = "Boat",
+            ped = 'csb_sol',
+            scenario = 'WORLD_HUMAN_CLIPBOARD',
+            showblip = true,
+            blipsprite = 356,
+            blipscale = 0.6,
+            blipcolor = 5,
 
             -- If Target is Enabled otherwise, leave it alone
-            ['radius'] = 1.5,
-            ['targetIcon'] = 'fas fa-ship'
+            radius = 1.5,
+            targetIcon = 'fas fa-ship'
         },
     }
 }

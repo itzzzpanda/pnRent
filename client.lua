@@ -26,7 +26,7 @@ local function openRentMenu(data)
 end
 
 RegisterNUICallback('pnRental:rent', function(data)
-    lib.callback('pnRental:rent', function(status)
+    lib.callback('pnRental:rent', false, function(status)
         if status then
             if Config.Core.Name == 'vRP' then
                 vRP.Notify(locale("success.paid", data.carPrice))
@@ -73,15 +73,15 @@ local function createBlips()
     if pedSpawned then return end
 
     for store in pairs(Config.Locations) do
-        if Config.Locations[store]["showblip"] then
-            local StoreBlip = AddBlipForCoord(Config.Locations[store]["coords"]["x"], Config.Locations[store]["coords"]["y"], Config.Locations[store]["coords"]["z"])
-            SetBlipSprite(StoreBlip, Config.Locations[store]["blipsprite"])
-            SetBlipScale(StoreBlip, Config.Locations[store]["blipscale"])
+        if Config.Locations[store].showblip then
+            local StoreBlip = AddBlipForCoord(Config.Locations[store].coords.x, Config.Locations[store].coords.y, Config.Locations[store].coords.z)
+            SetBlipSprite(StoreBlip, Config.Locations[store].blipsprite)
+            SetBlipScale(StoreBlip, Config.Locations[store].blipscale)
             SetBlipDisplay(StoreBlip, 4)
-            SetBlipColour(StoreBlip, Config.Locations[store]["blipcolor"])
+            SetBlipColour(StoreBlip, Config.Locations[store].blipcolor)
             SetBlipAsShortRange(StoreBlip, true)
             BeginTextCommandSetBlipName("STRING")
-            AddTextComponentSubstringPlayerName(Config.Locations[store]["label"])
+            AddTextComponentSubstringPlayerName(Config.Locations[store].label)
             EndTextCommandSetBlipName(StoreBlip)
         end
     end
@@ -91,28 +91,27 @@ local function createPeds()
     if pedSpawned then return end
 
     for k, v in pairs(Config.Locations) do
-        local current = type(v["ped"]) == "number" and v["ped"] or joaat(v["ped"])
+        local current = type(v.ped) == "number" and v.ped or joaat(v.ped)
 
         RequestModel(current)
         while not HasModelLoaded(current) do
             Wait(0)
         end
 
-        ShopPed[k] = CreatePed(0, current, v["coords"].x, v["coords"].y, v["coords"].z - 1, v["coords"].w, false, false)
-        TaskStartScenarioInPlace(ShopPed[k], v["scenario"], 0, true)
+        ShopPed[k] = CreatePed(0, current, v.coords.x, v.coords.y, v.coords.z - 1, v.coords.w, false, false)
+        TaskStartScenarioInPlace(ShopPed[k], v.scenario, 0, true)
         FreezeEntityPosition(ShopPed[k], true)
         SetEntityInvincible(ShopPed[k], true)
         SetBlockingOfNonTemporaryEvents(ShopPed[k], true)
-        
         if Config.Interactions.Target.Enabled and Config.Interactions.Target.ResourceName == 'qb-target' then
             exports['qb-target']:AddTargetEntity(ShopPed[k], {
                 options = {
                     {
                         label = locale("target.open"),
-                        icon = v["targetIcon"],
-                        onSelect = function()
+                        icon = v.targetIcon,
+                        action = function()
                             spawncarcoords = v.carspawn,
-                            openRentMenu(v.categorie)
+                            openRentMenu(Config[v.categorie])
                         end,
                     }
                 },
@@ -122,7 +121,7 @@ local function createPeds()
             exports.ox_target:addModel(ShopPed[k], {
                 {
                     label = locale("target.open"),
-                    icon = v["targetIcon"],
+                    icon = v.targetIcon,
                     onSelect = function()
                         spawncarcoords = v.carspawn,
                         openRentMenu(v.categorie)
@@ -135,7 +134,7 @@ local function createPeds()
 
         if Config.Interactions.TextUI.Enabled then
             lib.zones.box({
-                coords = vec3(v["coords"].x, v["coords"].y, v["coords"].z - 1),
+                coords = vec3(v.coords.x, v.coords.y, v.coords.z - 1),
                 size = vec3(1.5, 1.5, 1.5),
                 onEnter = function()
                     Config.Interactions.TextUI.Open(locale("textui.open"))
@@ -162,6 +161,10 @@ end
 AddEventHandler('onResourceStart', function(resourceName)
     if GetCurrentResourceName() ~= resourceName then return end
     createBlips()
+    SendNUIMessage({
+        action = 'setLocales',
+        data = lib.getLocales()
+    })
     createPeds()
 end)
 
