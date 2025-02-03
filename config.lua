@@ -2,11 +2,11 @@ return {
     VersionCheck = true,
 
     Core = {
-        Name = 'QBCore',
+        Name = 'vRP',
         -- vRP
         -- QBCore
         -- ESX
-        ResourceName = 'qb-core' -- Name of the Core Resource
+        ResourceName = 'vrp' -- Name of the Core Resource
         -- i.e vRP => vrp
         -- i.e QBCore => qb-core
         -- i.e ESX => es_extended
@@ -16,21 +16,23 @@ return {
 
     Interactions = {
         Target = {
-            Enabled = true,
+            Enabled = false,
             ResourceName = 'qb-target'
             -- Curently supported : ox_target | qb-target
         },
         TextUI = {
-            Enabled = false,
+            Enabled = true,
             Open = function(text)
-                exports[Core.ResourceName]:DrawText(text) -- ( QBCore )
+                -- exports[Core.ResourceName]:DrawText(text) -- ( QBCore )
                 -- exportsesx_textui:TextUI(text, 'info') ( ESX )
                 -- exportsokokTextUI:Open(text, 'lightgreen', 'left')
+                exports['textui']:Open(text)
             end,
             Close = function()
-                exports[Core.ResourceName]:HideText() -- ( QBCore )
-                -- exportsesx_textui:HideUI() ( ESX )
-                -- exportsokokTextUI:Close() ( okokTextUI )
+                -- exports[Core.ResourceName]:HideText() -- ( QBCore )
+                -- exports['esx_textui']:HideUI() ( ESX )
+                -- exports['okokTextUI']:Close() ( okokTextUI )
+                exports['textui']:Close()
             end
         }
     },

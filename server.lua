@@ -11,7 +11,7 @@ elseif Config.Core.Name == 'QBCore' then
 elseif Config.Core.Name == 'ESX' then 
     Core = exports[Config.Core.ResourceName]:getSharedObject()
 else
-    print("The frmework " .. Config.Core.Name .. " is not supported. Check the README.MD to see the supported scripts")
+    print("The framework " .. Config.Core.Name .. " is not supported. Check the README.MD to see the supported scripts")
 end
 
 local ped = nil
@@ -25,10 +25,13 @@ AddEventHandler('pnRental:createCar', function(model, plate, day)
     if Config.Core.Name == 'vRP' then
         local Player = vRP.getUserId({source})
 
-        MySQL.insert.await('INSERT INTO vrp_user_vehicles ( user_id, vehicle, vehicle_plate, rentfinish ) VALUES ( ?, ?, ?, ? )', {
+        MySQL.insert.await('INSERT INTO vrp_user_vehicles ( user_id, vehicle, vehicle_plate, upgrades, vId, stage, rentfinish ) VALUES ( ?, ?, ?, ?, ?, ?, ? )', {
             Player,
             model,
             plate,
+            json.encode(prop),
+            1,
+            0,
             rentFinishDate
         })
     elseif Config.Core.Name == 'ESX' then
@@ -64,7 +67,13 @@ AddEventHandler('onResourceStart', function(resourceName)
             DeletePed(ped)
         end
             TriggerEvent('pnRental:createPed')
-            MySQL.Async.execute("DELETE FROM player_vehicles WHERE rentfinish < NOW()", {})
+            if Config.Core.Name == 'vRP' then
+                MySQL.Async.execute("DELETE FROM vrp_user_vehicles WHERE rentfinish < NOW()", {})
+            elseif Config.Core.Name == 'ESX' then
+                MySQL.Async.execute("DELETE FROM owned_vehicles WHERE rentfinish < NOW()", {})
+            elseif Config.Core.Name == 'QBCore' then
+                MySQL.Async.execute("DELETE FROM player_vehicles WHERE rentfinish < NOW()", {})
+            end
             return
         end
 end)

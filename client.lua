@@ -1,9 +1,9 @@
 local Core = nil
 local Config = require 'config'
 if Config.Core.Name == 'vRP' then
-    Tunnel = module("vrp", "lib/Tunnel")
-    Proxy = module("vrp", "lib/Proxy")
-    vRP = Proxy.getInterface("vRP")
+    -- Tunnel = module("vrp", "lib/Tunnel")
+    -- Proxy = module("vrp", "lib/Proxy")
+    Core = Proxy.getInterface("vRP")
 elseif Config.Core.Name == 'QBCore' then
     Core = exports[Config.Core.ResourceName]:GetCoreObject()
 elseif Config.Core.Name == 'ESX' then 
@@ -29,7 +29,7 @@ RegisterNUICallback('pnRental:rent', function(data)
     lib.callback('pnRental:rent', false, function(status)
         if status then
             if Config.Core.Name == 'vRP' then
-                vRP.Notify(locale("success.paid", data.carPrice))
+                Core.Notify(locale("success.paid", data.carPrice))
             elseif Config.Core.Name == 'QBCore' then
                 Core.Functions.Notify(locale("success.paid", data.carPrice), 'success')
             elseif Config.Core.Name == 'ESX' then 
@@ -38,7 +38,7 @@ RegisterNUICallback('pnRental:rent', function(data)
             createCar(data)
         else
             if Config.Core.Name == 'vRP' then
-                vRP.Notify(locale("error.not_enough"))
+                Core.Notify(locale("error.not_enough"))
             elseif Config.Core.Name == 'QBCore' then
                 Core.Functions.Notify(locale("error.not_enough"), 'error')
             elseif Config.Core.Name == 'ESX' then 
@@ -63,8 +63,8 @@ function createCar(data)
     SetVehicleWindowTint(vehicle, 1)
     SetPedIntoVehicle(playerPed, vehicle, -1)
     SetVehicleNumberPlateText(vehicle, 'LS' .. math.random(10, 99) .. string.char(math.random(65, 90)) .. string.char(math.random(65, 90)) .. string.char(math.random(65, 90))) 
-    exports[Config.FuelResource]:SetFuel(vehicle, 100)
-    TriggerEvent('vehiclekeys:client:SetOwner', GetVehicleNumberPlateText(vehicle))
+    -- exports[Config.FuelResource]:SetFuel(vehicle, 100)
+    -- TriggerEvent('vehiclekeys:client:SetOwner', GetVehicleNumberPlateText(vehicle))
     TriggerServerEvent('pnRental:createCar', data.carName, GetVehicleNumberPlateText(vehicle) , data.carDay)
 end
 
@@ -124,7 +124,7 @@ local function createPeds()
                     icon = v.targetIcon,
                     onSelect = function()
                         spawncarcoords = v.carspawn,
-                        openRentMenu(v.categorie)
+                        openRentMenu(Config[v.categorie])
                     end,
                 }
             })
@@ -134,10 +134,17 @@ local function createPeds()
 
         if Config.Interactions.TextUI.Enabled then
             lib.zones.box({
-                coords = vec3(v.coords.x, v.coords.y, v.coords.z - 1),
+                coords = vec3(v.coords.x, v.coords.y, v.coords.z),
                 size = vec3(1.5, 1.5, 1.5),
+                debug = false,
                 onEnter = function()
                     Config.Interactions.TextUI.Open(locale("textui.open"))
+                end,
+                inside = function()
+                    if IsControlJustPressed(0, 38) then 
+                        spawncarcoords = v.carspawn,
+                        openRentMenu(Config[v.categorie])
+                    end
                 end,
                 onExit = function()
                     Config.Interactions.TextUI.Close()

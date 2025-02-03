@@ -23,24 +23,27 @@ document.onkeyup = function (data) {
 }
 
 openMenu = (data) => {
-  cars = data["Cars"]
+  cars = data["Vehicles"]
   setCategory(data["Category"])
   setCar(data["Category"][0].name)
 
   $('body').css('display', 'block')
 }
 
-setCategory = (data) => {
-  $('.category-box').empty()
-  data.forEach(element => {
-    $('.category-box').append(`
+const setCategory = (data) => {
+  const container = $('.category-box');
+  container.empty();
+
+  let itemsHtml = data.map(element => `
     <div class="item" data-name="${element.name}">
       <i class="fa fa-map-marker-alt"></i>
       <div class="name">${element.name}</div>
     </div>
-    `)
-  });
-}
+  `).join('');
+
+  container.append(itemsHtml);
+};
+
 
 setCar = (data) => {
   $('.car-box').empty()

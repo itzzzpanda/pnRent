@@ -12,26 +12,24 @@ shared_scripts {
     '@ox_lib/init.lua',
 }
 
-
 client_scripts {
-    'client.lua'
+     "@vrp/client/Tunnel.lua",
+    "@vrp/client/Proxy.lua",
+    'client.lua',
 }
 
 server_scripts {
+    "@vrp/lib/utils.lua",
     'server.lua',
-    '@oxmysql/lib/MySQL.lua',
+    '@oxmysql/lib/MySQL.lua'
 }
 
-ui_page "webv2/dist/index.html"
+ui_page "web/index.html"
 
 files {
     'locales/*.json',
     'config.lua',
-    
-	"webv2/dist/**",
-    "webv2/dist/assets/*.*",
-	"webv2/dist/assets/**/*.*"
+    'web/**'
 }
 
 dependency 'ox_lib'
-
